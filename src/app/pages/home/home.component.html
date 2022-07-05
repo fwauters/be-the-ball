@@ -1,0 +1,19 @@
+<p>home works! aaaaaaaaaaaaaaaaaaaaaaa</p>
+
+<button mat-raised-button color="primary" [routerLink]="['/', 'events']">
+  EVENTS
+</button>
+
+<mat-icon>home</mat-icon>
+
+<ng-container *ngIf="items$ | async; let items; else: loading">
+  <ng-container *ngIf="items.length > 0; else nothingFound">
+    <pre>
+      {{ items | json }}
+    </pre>
+  </ng-container>
+  <ng-template #nothingFound>
+    <em>Nothing found ...</em>
+  </ng-template>
+</ng-container>
+<ng-template #loading> Loading ... </ng-template>
