@@ -2,6 +2,8 @@
 
 Desktop Electron / Angular application I work on for fun, to collect and analyze the results of the bowling games we sometimes play after work with colleagues.
 
+I use : Angular / Material / TailwindCSS, ElectronJs, Firestore.
+
 I'll probably write a real readme soon, or not. :sweat_smile:
 
 <!--
