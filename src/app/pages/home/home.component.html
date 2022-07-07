@@ -4,13 +4,19 @@
   EVENTS
 </button>
 
+<button mat-raised-button color="accent" (click)="create()">ADD ITEM</button>
+
 <mat-icon>home</mat-icon>
 
 <ng-container *ngIf="items$ | async; let items; else: loading">
   <ng-container *ngIf="items.length > 0; else nothingFound">
-    <pre>
-      {{ items | json }}
-    </pre>
+    <div *ngFor="let item of items">
+      {{ item?.name }}
+      <span *ngIf="item?.test === collections.Players">{{
+        item.date.seconds * 1000 | date: "full"
+      }}</span>
+      <button mat-button color="warn" (click)="test(item.itemId)">DELETE</button>
+    </div>
   </ng-container>
   <ng-template #nothingFound>
     <em>Nothing found ...</em>

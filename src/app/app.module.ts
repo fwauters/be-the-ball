@@ -7,8 +7,8 @@ import { MaterialComponents } from './config/material-components';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
-import { getFirestore, provideFirestore } from '@angular/fire/firestore';
-import { FirebaseConfig } from './config/firebase-config';
+import { getFirestore, provideFirestore, FirestoreModule } from '@angular/fire/firestore';
+import { firebaseConfig } from './config/firebase-config';
 import { HomeComponent } from './pages/home/home.component';
 import { EventsComponent } from './pages/events/events.component';
 
@@ -23,7 +23,8 @@ import { EventsComponent } from './pages/events/events.component';
     AppRoutingModule,
     MaterialComponents,
     BrowserAnimationsModule,
-    provideFirebaseApp(() => initializeApp(FirebaseConfig)),
+    FirestoreModule,
+    provideFirebaseApp(() => initializeApp(firebaseConfig)),
     provideFirestore(() => getFirestore()),
   ],
   providers: [],
