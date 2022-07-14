@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,15 +12,19 @@ import { getFirestore, provideFirestore, FirestoreModule } from '@angular/fire/f
 import { firebaseConfig } from './config/firebase-config';
 import { HomeComponent } from './pages/home/home.component';
 import { EventsComponent } from './pages/events/events.component';
+import { CreateGameFormComponent } from './pages/events/components/create-game-form/create-game-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    EventsComponent
+    EventsComponent,
+    CreateGameFormComponent
   ],
   imports: [
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AppRoutingModule,
     MaterialComponents,
     BrowserAnimationsModule,

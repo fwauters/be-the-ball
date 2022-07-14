@@ -1,8 +1,26 @@
+@use "@angular/material" as mat;
+@include mat.core();
+
+$color-mat-primary: mat.define-palette(mat.$amber-palette, 400);
+$color-mat-accent: mat.define-palette(mat.$indigo-palette, 400);
+
+$bowling-theme: mat.define-dark-theme(
+  (
+    color: (
+      primary: $color-mat-primary,
+      accent: $color-mat-accent,
+    ),
+  )
+);
+
+@include mat.core-theme($bowling-theme);
+@include mat.button-theme($bowling-theme);
+
+$color-bowling-floor: #fadbab;
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-/* You can add global styles to this file, and also import other style files */
 
 html,
 body {
@@ -11,4 +29,13 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: black;
+}
+main {
+  padding: 0 25px;
+
+  .main-content {
+    padding: 25px;
+    background-image: url("./assets/bowling-floor.png");
+  }
 }
