@@ -13,13 +13,15 @@ import { firebaseConfig } from './config/firebase-config';
 import { HomeComponent } from './pages/home/home.component';
 import { EventsComponent } from './pages/events/events.component';
 import { CreateGameFormComponent } from './pages/events/components/create-game-form/create-game-form.component';
+import { EventGridComponent } from './pages/events/components/event-grid/event-grid.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     EventsComponent,
-    CreateGameFormComponent
+    CreateGameFormComponent,
+    EventGridComponent
   ],
   imports: [
     BrowserModule,

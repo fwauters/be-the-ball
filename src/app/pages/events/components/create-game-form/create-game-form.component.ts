@@ -1,5 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { Component } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-create-game-form',
@@ -7,15 +12,34 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./create-game-form.component.scss'],
 })
 export class CreateGameFormComponent {
-  firstFormGroup = this._formBuilder.group({
-    firstCtrl: ['', Validators.required],
-  });
-  secondFormGroup = this._formBuilder.group({
-    secondCtrl: ['', Validators.required],
-  });
-  isEditable = false;
+  scores = ['-', 1, 2, 3, 4, 5, 6, 7, 8, 9, '/', 'X'];
 
-  constructor(private _formBuilder: FormBuilder) {}
+  gameForms: FormGroup<{
+    [frame: string]: FormControl<any>;
+  }>[] = this.setGameForms();
 
-  // TODO : 1 stepper/player, 10 steps stepper (1 by frame). Loop from 0 to 8, 9 is treated differently
+  constructor(private fb: FormBuilder) {}
+
+  setGameForms() {
+    const gameForms = [];
+
+    for (let i = 0; i < 10; i++) {
+      const frame: { [key: string]: any[] } = {};
+
+      frame['roll1'] = ['', Validators.required];
+      frame['roll2'] = ['', Validators.required];
+
+      if (i === 9) {
+        frame['roll3'] = ['', Validators.required];
+      }
+
+      gameForms.push(this.fb.group(frame));
+    }
+
+    return gameForms;
+  }
+
+  saveGame() {
+    console.log('SAVE GAME !');
+  }
 }
