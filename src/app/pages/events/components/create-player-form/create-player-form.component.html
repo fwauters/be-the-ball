@@ -1,0 +1,31 @@
+<form class="flex flex-col">
+  <h3 class="!mb-[24px] text-center">CREATE PLAYER</h3>
+
+  <mat-form-field appearance="outline" color="accent">
+    <mat-label>Player's name</mat-label>
+    <input matInput [formControl]="playerForm" required autocomplete="off" />
+    <mat-error *ngIf="playerForm.hasError('required')">
+      Enter a name for the player
+    </mat-error>
+    <mat-error *ngIf="playerForm.hasError('pattern')">
+      No white space please
+    </mat-error>
+  </mat-form-field>
+
+  <div class="flex mt-[24px]">
+    <button mat-raised-button color="warn" class="!mr-[24px]" mat-dialog-close>
+      Cancel
+    </button>
+
+    <button
+      mat-raised-button
+      color="primary"
+      (click)="createPlayer()"
+      [disabled]="
+        playerForm.hasError('required') || playerForm.hasError('pattern')
+      "
+    >
+      Create new player
+    </button>
+  </div>
+</form>

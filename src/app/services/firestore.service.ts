@@ -12,76 +12,52 @@ import {
 } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { ECollection } from '../models/enums';
+import { IPlayer } from '../models/interfaces';
 
 export interface Item extends DocumentData {
-  name: string;
-  score: number;
-  date: {
-    nanoseconds: number;
-    seconds: number;
-  };
+  date: number;
+  test: any[];
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class FirestoreService {
-  items$: Observable<any[]>;
   fs: Firestore;
-  data: CollectionReference;
 
-  testItem = [
-    {
-      a: 'a',
-      b: 1,
-      c: false,
-      d: [
-        {
-          sqdsdsd: 452453,
-          dsfdsf: 64,
-        },
-        {
-          sqdsdsd: 452453,
-          dsfdsf: 64,
-        },
-      ],
-    },
-    {
-      a: 'a',
-      b: 1,
-      c: false,
-    },
-    {
-      a: 'a',
-      b: 1,
-      c: false,
-    },
-  ];
+  data: CollectionReference;
+  items$: Observable<any[]>;
+
+  playersData: CollectionReference;
+  players$: Observable<IPlayer[]>;
 
   //-----------------------------------------------
   // * https://firebase.google.com/docs/firestore/manage-data/delete-data
   //-----------------------------------------------
 
   constructor(firestore: Firestore) {
-    console.time("firestore request");
+    this.fs = firestore;
+
     const data = collection(firestore, 'test');
     this.data = data;
-    console.log(data.id);
-    console.log('FirestoreService constructor');
-    this.fs = firestore;
+    console.log('firestore.collection("test") ID :', data.id);
     this.items$ = collectionData(data, { idField: 'id' }) as Observable<Item[]>;
-    console.timeEnd("firestore request");
+
+    this.playersData = collection(firestore, 'players');
+    this.players$ = collectionData(this.playersData, {
+      idField: 'id',
+    }) as Observable<IPlayer[]>;
   }
 
-  async createItem(/* collectionName: ECollection, data: Item | any */) {
-    const test = collection(this.fs, 'test');
-    return await addDoc(test, {
-      date: new Date().getTime(),
-      test: this.testItem,
-    });
+  async createDocument(
+    reference: ECollection,
+    data: Partial<Item> | Partial<IPlayer>
+  ) {
+    const coll = collection(this.fs, reference);
+    return await addDoc(coll, data);
   }
 
-  async deleteItem(id: string) {
+  async deleteDocument(id: string) {
     const docRef: DocumentReference = doc(this.data, id);
     return await deleteDoc(docRef);
   }

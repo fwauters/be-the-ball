@@ -1,6 +1,15 @@
-<p>events works!</p>
+<h2>Ajouter une partie</h2>
 
-<button mat-raised-button color="accent" [routerLink]="['/']">RETOUR</button>
+<app-select-players-form></app-select-players-form>
+
+<button
+  mat-raised-button
+  color="accent"
+  class="!m-[19px] !ml-0"
+  [routerLink]="['/']"
+>
+  RETOUR
+</button>
 
 <button mat-raised-button color="primary" (click)="createNewGame()">
   ADD GAME

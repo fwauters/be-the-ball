@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EventGridComponent } from './event-grid.component';
+import { GameEventGridComponent } from './game-event-grid.component';
 
-describe('EventGridComponent', () => {
-  let component: EventGridComponent;
-  let fixture: ComponentFixture<EventGridComponent>;
+describe('GameEventGridComponent', () => {
+  let component: GameEventGridComponent;
+  let fixture: ComponentFixture<GameEventGridComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EventGridComponent ]
+      declarations: [ GameEventGridComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(EventGridComponent);
+    fixture = TestBed.createComponent(GameEventGridComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

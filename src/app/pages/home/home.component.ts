@@ -14,17 +14,48 @@ export class HomeComponent {
   items$ = this.firestore.items$;
   collections = ECollection;
 
+  testItem = [
+    {
+      a: 'a',
+      b: 1,
+      c: false,
+      d: [
+        {
+          sqdsdsd: 452453,
+          dsfdsf: 64,
+        },
+        {
+          sqdsdsd: 452453,
+          dsfdsf: 64,
+        },
+      ],
+    },
+    {
+      a: 'a',
+      b: 1,
+      c: false,
+    },
+    {
+      a: 'a',
+      b: 1,
+      c: false,
+    },
+  ];
+
   constructor(private firestore: FirestoreService) {
     this.items$.subscribe(console.log);
     console.log('HomeComponent constructor');
   }
 
   create() {
-    this.firestore.createItem();
+    this.firestore.createDocument(ECollection.Test, {
+      date: new Date().getTime(),
+      test: this.testItem,
+    });
   }
 
   deleteItem(id: string) {
-    this.firestore.deleteItem(id);
+    this.firestore.deleteDocument(id);
     console.log('DELETE');
   }
 

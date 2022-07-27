@@ -13,7 +13,9 @@ import { firebaseConfig } from './config/firebase-config';
 import { HomeComponent } from './pages/home/home.component';
 import { EventsComponent } from './pages/events/events.component';
 import { CreateGameFormComponent } from './pages/events/components/create-game-form/create-game-form.component';
-import { EventGridComponent } from './pages/events/components/event-grid/event-grid.component';
+import { SelectPlayersFormComponent } from './pages/events/components/select-players-form/select-players-form.component';
+import { CreatePlayerFormComponent } from './pages/events/components/create-player-form/create-player-form.component';
+import { GameEventGridComponent } from './pages/events/components/game-event-grid/game-event-grid.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { EventGridComponent } from './pages/events/components/event-grid/event-g
     HomeComponent,
     EventsComponent,
     CreateGameFormComponent,
-    EventGridComponent
+    SelectPlayersFormComponent,
+    CreatePlayerFormComponent,
+    GameEventGridComponent
   ],
   imports: [
     BrowserModule,
