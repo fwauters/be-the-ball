@@ -22,8 +22,10 @@ $bowling-theme: mat.define-dark-theme(
 $color-bowling-floor: #fadbab;
 $color-tailwind-slate-400: #94a3b8;
 $color-tailwind-slate-800: #1e293b;
+$color-tailwind-slate-800-op50: rgba(30, 41, 59, 0.5);
 
 // TODO : color material primary, accent, warn ???
+// ? can I use $color-mat-primary, accent, etc.. ?
 
 html,
 body {

@@ -24,6 +24,10 @@ export class SelectPlayersFormComponent {
     private dialogService: DialogService
   ) {}
 
+  addPlayer() {
+    console.log('ADD PLAYER !');
+  }
+
   openCreatePlayerForm() {
     this.dialogService.openCreatePlayerDialog();
   }

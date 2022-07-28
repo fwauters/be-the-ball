@@ -11,7 +11,7 @@ export class DialogService {
   defaultOptions = {
     width: '',
     height: '',
-    maxWidth: '96vw',
+    maxWidth: '800px',
     maxHeight: '96vh',
     panelClass: '',
     data: {},
