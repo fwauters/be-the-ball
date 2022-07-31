@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { FormArray, FormControl, Validators } from '@angular/forms';
 import { map } from 'rxjs';
+import { IPlayer } from 'src/app/models/interfaces';
 import { DialogService } from 'src/app/services/dialog.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
 
@@ -9,7 +11,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
   styleUrls: ['./select-players-form.component.scss'],
 })
 export class SelectPlayersFormComponent {
-  players$ = this.firestore.players$.pipe(
+  allPlayers$ = this.firestore.players$.pipe(
     map((players) =>
       players.sort((a, b) => {
         if (a.name < b.name) return -1;
@@ -18,6 +20,10 @@ export class SelectPlayersFormComponent {
       })
     )
   );
+  selectPlayersForm = new FormArray([new FormControl('', Validators.required)]);
+  selectedPlayers: { [i: number]: IPlayer } = {};
+
+  @Output() selectedPlayer = new EventEmitter<any>();
 
   constructor(
     private firestore: FirestoreService,
@@ -25,7 +31,11 @@ export class SelectPlayersFormComponent {
   ) {}
 
   addPlayer() {
-    console.log('ADD PLAYER !');
+    this.selectPlayersForm.push(new FormControl('', Validators.required));
+  }
+
+  removePlayer() {
+    this.selectPlayersForm.removeAt(-1);
   }
 
   openCreatePlayerForm() {
