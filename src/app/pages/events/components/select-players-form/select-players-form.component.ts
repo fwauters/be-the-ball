@@ -20,10 +20,13 @@ export class SelectPlayersFormComponent {
       })
     )
   );
-  selectPlayersForm = new FormArray([new FormControl('', Validators.required)]);
+  selectPlayersForm = new FormArray([
+    new FormControl({} as IPlayer, Validators.required),
+  ]);
   selectedPlayers: { [i: number]: IPlayer } = {};
 
-  @Output() selectedPlayer = new EventEmitter<any>();
+  @Output() selectPlayer = new EventEmitter<IPlayer>();
+  @Output() takeOffPlayer = new EventEmitter();
 
   constructor(
     private firestore: FirestoreService,
@@ -31,14 +34,20 @@ export class SelectPlayersFormComponent {
   ) {}
 
   addPlayer() {
-    this.selectPlayersForm.push(new FormControl('', Validators.required));
+    this.selectPlayersForm.push(
+      new FormControl({} as IPlayer, Validators.required)
+    );
+    console.log(this.selectedPlayers);
   }
 
-  removePlayer() {
+  removePlayer(index: number) {
     this.selectPlayersForm.removeAt(-1);
+    this.takeOffPlayer.emit();
+    delete this.selectedPlayers[index];
   }
 
   openCreatePlayerForm() {
+
     this.dialogService.openCreatePlayerDialog();
   }
 }

@@ -16,6 +16,7 @@ import { CreateGameFormComponent } from './pages/events/components/create-game-f
 import { SelectPlayersFormComponent } from './pages/events/components/select-players-form/select-players-form.component';
 import { CreatePlayerFormComponent } from './pages/events/components/create-player-form/create-player-form.component';
 import { GameEventGridComponent } from './pages/events/components/game-event-grid/game-event-grid.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { GameEventGridComponent } from './pages/events/components/game-event-gri
     CreateGameFormComponent,
     SelectPlayersFormComponent,
     CreatePlayerFormComponent,
-    GameEventGridComponent
+    GameEventGridComponent,
+    SettingsComponent
   ],
   imports: [
     BrowserModule,

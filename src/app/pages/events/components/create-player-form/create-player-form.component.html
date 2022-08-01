@@ -10,6 +10,9 @@
     <mat-error *ngIf="playerForm.hasError('pattern')">
       No white space please
     </mat-error>
+    <mat-error *ngIf="playerForm.hasError('minlength')">
+      Minimum 3 characters
+    </mat-error>
   </mat-form-field>
 
   <div class="flex mt-[24px]">
@@ -22,7 +25,9 @@
       color="primary"
       (click)="createPlayer()"
       [disabled]="
-        playerForm.hasError('required') || playerForm.hasError('pattern')
+        playerForm.hasError('required') ||
+        playerForm.hasError('pattern') ||
+        playerForm.errors?.['minlength']
       "
     >
       Create new player

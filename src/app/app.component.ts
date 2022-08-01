@@ -14,6 +14,10 @@ export class AppComponent {
     {
       link: 'events',
       name: 'Games',
+    },
+    {
+      link: 'settings',
+      name: 'Settings',
     }
   ]
 }

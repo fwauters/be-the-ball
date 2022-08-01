@@ -44,6 +44,7 @@ export class FirestoreService {
     this.items$ = collectionData(data, { idField: 'id' }) as Observable<Item[]>;
 
     this.playersData = collection(firestore, 'players');
+    console.log('++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++');
     this.players$ = collectionData(this.playersData, {
       idField: 'id',
     }) as Observable<IPlayer[]>;

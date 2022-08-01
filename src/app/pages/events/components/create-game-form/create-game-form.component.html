@@ -1,3 +1,8 @@
+<app-select-players-form
+  (selectPlayer)="addPlayer($event)"
+  (takeOffPlayer)="removePlayer($event)"
+></app-select-players-form>
+
 <mat-stepper #stepper [linear]="false" color="accent">
   <ng-container *ngFor="let frameForm of gameForms; let frameIndex = index">
     <mat-step [stepControl]="frameForm">
@@ -8,6 +13,7 @@
           <mat-form-field
             *ngIf="roll !== 3 || (roll === 3 && frameIndex === 9)"
             appearance="outline"
+            color="accent"
             class="w-[100px] m-[10px]"
           >
             <mat-label>Roll {{ roll }}</mat-label>

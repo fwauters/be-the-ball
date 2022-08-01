@@ -8,16 +8,9 @@ import { DialogService } from 'src/app/services/dialog.service';
   styleUrls: ['./events.component.scss'],
 })
 export class EventsComponent {
-  twoPlayersNeededMsg = 'You need at least two players to create a games';
-  players: IPlayer[] = [];
-
   constructor(private dialogService: DialogService) {}
 
   createNewGame() {
-    this.dialogService.openCreateGameDialog(this.players);
-  }
-
-  selectedPlayer(event: any) {
-    console.log(event);
+    this.dialogService.openCreateGameDialog();
   }
 }

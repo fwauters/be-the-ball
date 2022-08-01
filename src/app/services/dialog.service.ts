@@ -20,10 +20,9 @@ export class DialogService {
 
   constructor(private dialog: MatDialog) {}
 
-  openCreateGameDialog(players: IPlayer[]) {
+  openCreateGameDialog() {
     const options = this.defaultOptions;
-    options.maxWidth = '800px';
-    options.data = { players };
+    options.maxWidth = '1100px';
     const dialogRef: MatDialogRef<CreateGameFormComponent> = this.dialog.open(
       CreateGameFormComponent,
       options

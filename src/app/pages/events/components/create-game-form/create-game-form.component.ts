@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { IPlayer } from 'src/app/models/interfaces';
 
 @Component({
   selector: 'app-create-game-form',
@@ -18,6 +19,8 @@ export class CreateGameFormComponent {
   gameForms: FormGroup<{
     [frame: string]: FormControl<any>;
   }>[] = this.setGameForms();
+
+  players: IPlayer[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -47,5 +50,16 @@ export class CreateGameFormComponent {
 
   saveGame() {
     console.log('SAVE GAME !');
+  }
+
+  addPlayer(player: IPlayer) {
+    console.log(player);
+    this.players.push(player);
+  }
+
+  removePlayer(test: any) {
+    console.log(test);
+    this.players.pop();
+    console.log(this.players);
   }
 }

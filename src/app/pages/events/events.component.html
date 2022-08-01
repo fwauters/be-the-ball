@@ -1,21 +1,12 @@
-<h2>Ajouter une partie</h2>
-
-<app-select-players-form (selectedPlayer)="selectedPlayer($event)"></app-select-players-form>
-
-<div class="flex items-center">
+<div class="flex items-center bg-[rgba(30,41,59,0.5)] rounded-[4px] mb-[25px]">
   <button
     mat-raised-button
     color="primary"
-    class="!m-[19px] !ml-0"
+    class="!m-[19px]"
     (click)="createNewGame()"
-    [disabled]="false"
   >
-    ADD GAME
+    ADD NEW GAME
   </button>
-
-  <mat-error *ngIf="true" class="font-[500]">
-    {{ twoPlayersNeededMsg | uppercase}}
-  </mat-error>
 </div>
 
 <div>

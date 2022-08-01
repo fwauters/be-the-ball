@@ -12,7 +12,10 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class CreatePlayerFormComponent {
   collection = ECollection.Players;
-  playerForm = new FormControl('', Validators.pattern(REGEX_NO_WHITE_SPACE));
+  playerForm = new FormControl('', [
+    Validators.pattern(REGEX_NO_WHITE_SPACE),
+    Validators.minLength(3),
+  ]);
 
   constructor(
     private firestore: FirestoreService,
