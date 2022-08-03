@@ -22,7 +22,7 @@ export class DialogService {
 
   openCreateGameDialog() {
     const options = this.defaultOptions;
-    options.maxWidth = '1100px';
+    options.maxWidth = '1000px';
     const dialogRef: MatDialogRef<CreateGameFormComponent> = this.dialog.open(
       CreateGameFormComponent,
       options
