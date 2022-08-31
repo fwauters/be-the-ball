@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IPlayer } from 'src/app/models/interfaces';
+import { arrayContainsDuplicates } from 'src/app/utils/utils';
 
 @Component({
   selector: 'app-create-game-form',
@@ -14,9 +15,10 @@ import { IPlayer } from 'src/app/models/interfaces';
 })
 export class CreateGameFormComponent {
   scores = ['-', 1, 2, 3, 4, 5, 6, 7, 8, 9, '/', 'X'];
+  playerChosenTwice = false;
 
   gameForms: FormGroup<{
-    [frame: string]: FormControl<any>;
+    [frame: string]: FormControl<number | string>;
   }>[] = this.setGameForms();
 
   players: IPlayer[] = [];
@@ -31,14 +33,14 @@ export class CreateGameFormComponent {
   setGameForms() {
     const gameForms = [];
 
-    for (let i = 0; i < 10; i++) {
-      const frame: { [key: string]: any[] } = {};
+    for (let roll = 1; roll <= 10; roll++) {
+      const frame: { [key: string]: FormControl } = {};
 
-      frame['roll1'] = ['', Validators.required];
-      frame['roll2'] = ['', Validators.required];
+      frame['roll1'] = new FormControl(['', Validators.required]);
+      frame['roll2'] = new FormControl(['', Validators.required]);
 
-      if (i === 9) {
-        frame['roll3'] = ['', Validators.required];
+      if (roll === 10) {
+        frame['roll3'] = new FormControl(['', Validators.required]);
       }
 
       gameForms.push(this.fb.group(frame));
@@ -51,9 +53,16 @@ export class CreateGameFormComponent {
     console.log('SAVE GAME !');
   }
 
-  addPlayer(player: IPlayer) {
-    console.log(player);
-    this.players.push(player);
+  addPlayer(data: { index: number; player: IPlayer }) {
+    console.log(data);
+    if (this.players?.[data.index]) {
+      this.players[data.index] = data.player;
+    } else {
+      this.players.push(data.player);
+    }
+    this.playerChosenTwice = arrayContainsDuplicates(this.players);
+
+    console.log(this.players);
   }
 
   removePlayer(test: any) {

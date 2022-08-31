@@ -1,21 +1,23 @@
 <section
-  class="bg-[rgba(30,41,59,0.5)] min-h-[100px] rounded-t-[4px] flex justify-between items-center"
+  class="bg-[rgba(30,41,59,0.5)] min-h-[100px] rounded-t-[4px] flex flex-col justify-between"
 >
   <ng-container
     *ngIf="allPlayers$ | async; let createdPlayers; else: loadingPlayers"
   >
-    <div class="flex items-center pl-[5px]">
+    <div class="flex pl-[5px]">
       <ng-container
         ><ng-container *ngFor="let p of selectPlayersForm.value; let i = index">
           <mat-form-field
             appearance="outline"
-            color="primary"
-            class="w-[100px] m-[19px] mb-0 mr-0"
+            color="accent"
+            class="w-[150px] m-[19px] mb-0 mr-0"
           >
             <mat-label>Player {{ i + 1 }}</mat-label>
             <mat-select
               [(ngModel)]="selectedPlayers[i]"
-              (selectionChange)="selectPlayer.emit(selectedPlayers[i])"
+              (selectionChange)="
+                selectPlayer.emit({ index: i, player: selectedPlayers[i] })
+              "
             >
               <mat-option
                 *ngFor="let player of createdPlayers"
@@ -28,7 +30,7 @@
 
           <div
             *ngIf="i === selectPlayersForm.value.length - 1"
-            class="ml-[20px]"
+            class="ml-[20px] flex items-center"
           >
             <button
               mat-button
@@ -51,12 +53,26 @@
       </ng-container>
     </div>
 
-    <div>
+    <div class="m-[24px] mt-0 flex justify-between">
+      <div class="flex items-center">
+        <button
+          mat-raised-button
+          color="accent"
+          [disabled]="alreadyChosenError || selectPlayersForm.value.length < 2"
+        >
+          Validate players
+        </button>
+        <mat-error *ngIf="alreadyChosenError" class="ml-[24px]"
+          >A player is chosen twice</mat-error
+        >
+        <mat-error *ngIf="selectPlayersForm.value.length < 2 && selectPlayersForm.value[1]" class="ml-[24px]"
+          >A game is minimum 2 players</mat-error
+        >
+      </div>
       <button
         mat-raised-button
         mat-dialog-close
         color="primary"
-        class="!mr-[24px]"
         (click)="openCreatePlayerForm()"
       >
         Create new player
@@ -64,8 +80,11 @@
     </div>
   </ng-container>
   <ng-template #loadingPlayers>
-    <div class="p-[19px]">
-      <span class="text-lg ml-[10px] text-slate-200">Loading players ...</span>
+    <div class="p-[19px] flex items-center">
+      <mat-spinner [diameter]="25"></mat-spinner>
+      <span class="text-lg ml-[10px] text-slate-200"
+        >&nbsp; Loading players ...</span
+      >
     </div>
   </ng-template>
 </section>

@@ -1,6 +1,6 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormArray, FormControl, Validators } from '@angular/forms';
-import { map } from 'rxjs';
+import { map, of } from 'rxjs';
 import { IPlayer } from 'src/app/models/interfaces';
 import { DialogService } from 'src/app/services/dialog.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -18,13 +18,18 @@ export class SelectPlayersFormComponent {
         return 0;
       })
     )
-  );
-  selectPlayersForm = new FormArray([
+  ) /* of(null) */;
+  selectPlayersForm = new FormArray<FormControl<IPlayer | null>>([
     new FormControl({} as IPlayer, Validators.required),
   ]);
   selectedPlayers: { [i: number]: IPlayer } = {};
 
-  @Output() selectPlayer = new EventEmitter<IPlayer>();
+  @Input() alreadyChosenError: boolean = false;
+
+  @Output() selectPlayer = new EventEmitter<{
+    index: number;
+    player: IPlayer;
+  }>();
   @Output() takeOffPlayer = new EventEmitter();
 
   constructor(
@@ -37,6 +42,7 @@ export class SelectPlayersFormComponent {
       new FormControl({} as IPlayer, Validators.required)
     );
     console.log(this.selectedPlayers);
+    console.log(this.selectPlayersForm.value);
   }
 
   removePlayer(index: number) {

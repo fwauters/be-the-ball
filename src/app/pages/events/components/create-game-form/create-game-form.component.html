@@ -1,9 +1,10 @@
 <app-select-players-form
+  [alreadyChosenError]="playerChosenTwice"
   (selectPlayer)="addPlayer($event)"
   (takeOffPlayer)="removePlayer($event)"
 ></app-select-players-form>
 
-<mat-stepper #stepper [linear]="false" color="accent">
+<mat-stepper #gameStepper [linear]="false" color="accent">
   <ng-container *ngFor="let frameForm of gameForms; let frameIndex = index">
     <mat-step [stepControl]="frameForm">
       <form [formGroup]="frameForm">
@@ -38,7 +39,7 @@
             </ng-template>
           </div>
 
-          <button mat-button color="warn" (click)="stepper.reset()">
+          <button mat-button color="warn" (click)="gameStepper.reset()">
             Reset
           </button>
         </div>
