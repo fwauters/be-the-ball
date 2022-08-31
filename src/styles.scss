@@ -36,6 +36,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
   background-color: $color-tailwind-slate-800;
 }
+header {
+  .active-link {
+    color: rgb(165, 180, 200);
+  }
+}
 main {
   padding: 0 25px;
 

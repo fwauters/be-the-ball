@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { EventsComponent } from './pages/events/events.component';
 import { HomeComponent } from './pages/home/home.component';
+import { AboutComponent } from './pages/settings/components/about/about.component';
 import { LicenseComponent } from './pages/settings/components/license/license.component';
 import { SettingsComponent } from './pages/settings/settings.component';
 
@@ -19,6 +20,10 @@ const routes: Routes = [
     path: 'settings',
     component: SettingsComponent,
     children: [
+      {
+        path: 'about',
+        component: AboutComponent,
+      },
       {
         path: 'license',
         component: LicenseComponent,

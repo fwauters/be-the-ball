@@ -8,7 +8,6 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 @Component({
   selector: 'app-create-player-form',
   templateUrl: './create-player-form.component.html',
-  styleUrls: ['./create-player-form.component.scss'],
 })
 export class CreatePlayerFormComponent {
   collection = ECollection.Players;

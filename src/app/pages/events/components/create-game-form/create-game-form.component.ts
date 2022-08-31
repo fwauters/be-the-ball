@@ -11,7 +11,6 @@ import { IPlayer } from 'src/app/models/interfaces';
 @Component({
   selector: 'app-create-game-form',
   templateUrl: './create-game-form.component.html',
-  styleUrls: ['./create-game-form.component.scss'],
 })
 export class CreateGameFormComponent {
   scores = ['-', 1, 2, 3, 4, 5, 6, 7, 8, 9, '/', 'X'];

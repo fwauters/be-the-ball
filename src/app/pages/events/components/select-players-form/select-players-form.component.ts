@@ -8,7 +8,6 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 @Component({
   selector: 'app-select-players-form',
   templateUrl: './select-players-form.component.html',
-  styleUrls: ['./select-players-form.component.scss'],
 })
 export class SelectPlayersFormComponent {
   allPlayers$ = this.firestore.players$.pipe(
@@ -47,7 +46,6 @@ export class SelectPlayersFormComponent {
   }
 
   openCreatePlayerForm() {
-
     this.dialogService.openCreatePlayerDialog();
   }
 }
