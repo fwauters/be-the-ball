@@ -15,6 +15,7 @@ import { arrayContainsDuplicates } from 'src/app/utils/utils';
 })
 export class CreateGameFormComponent {
   scores = ['-', 1, 2, 3, 4, 5, 6, 7, 8, 9, '/', 'X'];
+  playersValidated = false;
   playerChosenTwice = false;
 
   gameForms: FormGroup<{
@@ -65,9 +66,14 @@ export class CreateGameFormComponent {
     console.log(this.players);
   }
 
-  removePlayer(test: any) {
-    console.log(test);
+  removePlayer() {
     this.players.pop();
     console.log(this.players);
+    this.playerChosenTwice = arrayContainsDuplicates(this.players);
+  }
+
+  approvePlayers(event: any) {
+    console.log(event);
+    this.playersValidated = true;
   }
 }
