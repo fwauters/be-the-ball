@@ -8,7 +8,7 @@
 </div>
 
 <div *ngIf="playersValidated">
-  <mat-stepper #gameStepper [linear]="true" color="accent">
+  <mat-stepper #gameStepper [linear]="false" color="accent">
     <ng-container *ngFor="let frameForm of gameForms; let frameIndex = index">
       <mat-step [stepControl]="frameForm">
         <form [formGroup]="frameForm" class="flex flex-col items-start">
@@ -32,6 +32,7 @@
             </ng-container>
           </div>
 
+          <!-- => actions -->
           <div class="w-full flex justify-between">
             <div>
               <ng-container *ngIf="frameIndex !== 0">

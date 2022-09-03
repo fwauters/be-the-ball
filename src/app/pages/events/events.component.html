@@ -1,7 +1,12 @@
 <div class="flex items-center bg-[rgba(30,41,59,0.5)] rounded-[4px] mb-[25px]">
   <h2>Add a new game</h2>
 
-  <mat-form-field appearance="fill">
+  <mat-form-field appearance="outline">
+    <mat-label>Name (optional)</mat-label>
+    <input [(ngModel)]="name" matInput />
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
     <mat-label>Date</mat-label>
     <input matInput [matDatepicker]="dp" [(ngModel)]="date" />
     <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>

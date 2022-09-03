@@ -1,10 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IPlayer } from 'src/app/models/interfaces';
 import { arrayContainsDuplicates } from 'src/app/utils/utils';
@@ -24,7 +19,7 @@ export class CreateGameFormComponent {
   }>[] = [];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: { date: Date },
+    @Inject(MAT_DIALOG_DATA) public data: { date: Date; name?: string },
     private fb: FormBuilder
   ) {
     console.log(data);
@@ -51,6 +46,31 @@ export class CreateGameFormComponent {
 
   saveGame() {
     console.log('SAVE GAME !');
+    console.log(this.gameForms);
+
+    const fromData = [];
+
+    for (const form of this.gameForms) {
+      for (const key in form.value) {
+        const data = form.value[key];
+
+        const k = key.split('_');
+        // k[0] === playerId
+        // k[1] === roll number (1 -> 3)
+
+        const player = this.players.find((player) => {
+          player.id === k[0];
+        });
+
+
+      }
+    }
+
+    const event = {
+      date: this.data.date,
+      name: this.data?.name,
+      game: {},
+    };
   }
 
   addPlayer(data: { index: number; player: IPlayer }) {

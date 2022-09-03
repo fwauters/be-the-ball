@@ -39,7 +39,7 @@ export class GameGridComponent {
       frame7: [3, 2],
       frame8: [3, 2],
       frame9: [3, 2],
-      frame10: [3, 2, 5],
+      frame10: [3, 2],
       total: 666,
     },
   ];

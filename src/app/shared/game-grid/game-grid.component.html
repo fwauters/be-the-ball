@@ -1,8 +1,4 @@
 <table mat-table [dataSource]="data" class="mat-elevation-z8 w-full rounded-sm">
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Position Column -->
   <ng-container matColumnDef="player">
     <th mat-header-cell *matHeaderCellDef>Player</th>
     <td mat-cell *matCellDef="let element">{{ element.player.pseudo }}</td>
