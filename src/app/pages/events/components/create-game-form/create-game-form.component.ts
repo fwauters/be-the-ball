@@ -1,6 +1,5 @@
 import { Component, Inject } from '@angular/core';
 import {
-  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -25,7 +24,7 @@ export class CreateGameFormComponent {
   }>[] = [];
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public data: { date: Date },
     private fb: FormBuilder
   ) {
     console.log(data);
@@ -38,11 +37,11 @@ export class CreateGameFormComponent {
       const rolls: { [key: string]: FormControl } = {};
 
       for (const player of this.players) {
-        rolls[player.id + '_1'] = new FormControl(['', Validators.required]);
-        rolls[player.id + '_2'] = new FormControl(['', Validators.required]);
+        rolls[player.id + '_1'] = new FormControl<string>('');
+        rolls[player.id + '_2'] = new FormControl<string>('');
 
         if (frame === 10) {
-          rolls[player.id + '_3'] = new FormControl(['', Validators.required]);
+          rolls[player.id + '_3'] = new FormControl<string>('');
         }
       }
       gameForms.push(this.fb.group(rolls));

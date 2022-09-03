@@ -7,6 +7,7 @@ export interface IGame extends DocumentData {
 export interface IPlayer extends DocumentData {
   id: string;
   name: string;
+  pseudo: string; // max 6 letters only maj
 }
 
 export interface Events {

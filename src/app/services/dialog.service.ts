@@ -20,9 +20,10 @@ export class DialogService {
 
   constructor(private dialog: MatDialog) {}
 
-  openCreateGameDialog() {
+  openCreateGameDialog(date: Date) {
     const options = this.defaultOptions;
     options.maxWidth = '1000px';
+    options.data = { date };
     const dialogRef: MatDialogRef<CreateGameFormComponent> = this.dialog.open(
       CreateGameFormComponent,
       options

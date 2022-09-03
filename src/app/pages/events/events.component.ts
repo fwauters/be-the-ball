@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { IPlayer } from 'src/app/models/interfaces';
 import { DialogService } from 'src/app/services/dialog.service';
 
 @Component({
@@ -7,9 +6,13 @@ import { DialogService } from 'src/app/services/dialog.service';
   templateUrl: './events.component.html',
 })
 export class EventsComponent {
+  date: Date | null = null;
+
   constructor(private dialogService: DialogService) {}
 
   createNewGame() {
-    this.dialogService.openCreateGameDialog();
+    if (this.date) {
+      this.dialogService.openCreateGameDialog(this.date);
+    }
   }
 }

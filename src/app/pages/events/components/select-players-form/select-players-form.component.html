@@ -35,7 +35,7 @@
               class="text-indigo-300"
               (click)="addPlayer()"
               [disabled]="
-                selectPlayersForm.value.length >= 8 ||
+                selectPlayersForm.value.length >= 6 ||
                 !selectPlayersForm.value[i]
               "
             >
@@ -93,9 +93,7 @@
     <div class="h-[100px] flex items-center justify-center">
       <div class="flex items-center">
         <mat-spinner [diameter]="25"></mat-spinner>
-        <span class="text-lg text-slate-200"
-          >&nbsp; Loading players ...</span
-        >
+        <span class="text-lg text-slate-200">&nbsp; Loading players ...</span>
       </div>
     </div>
   </ng-template>

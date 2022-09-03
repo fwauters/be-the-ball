@@ -7,12 +7,11 @@
   ></app-select-players-form>
 </div>
 
-<div [hidden]="!playersValidated">
-  <mat-stepper #gameStepper [linear]="false" color="accent">
+<div *ngIf="playersValidated">
+  <mat-stepper #gameStepper [linear]="true" color="accent">
     <ng-container *ngFor="let frameForm of gameForms; let frameIndex = index">
       <mat-step [stepControl]="frameForm">
         <form [formGroup]="frameForm" class="flex flex-col items-start">
-
           <div *ngFor="let player of players">
             <span>{{ player.name }}</span>
 
@@ -21,7 +20,7 @@
                 *ngIf="roll !== 3 || (roll === 3 && frameIndex === 9)"
                 appearance="outline"
                 color="accent"
-                class="w-[100px] m-[10px]"
+                class="formFieldReset w-[100px] m-[10px]"
               >
                 <mat-label>Roll {{ roll }}</mat-label>
                 <mat-select [formControlName]="player.id + '_' + roll" required>
@@ -33,7 +32,7 @@
             </ng-container>
           </div>
 
-          <div class="flex justify-between">
+          <div class="w-full flex justify-between">
             <div>
               <ng-container *ngIf="frameIndex !== 0">
                 <button mat-button matStepperPrevious>Back</button>
@@ -46,18 +45,20 @@
               </ng-template>
             </div>
 
-            <div>
-              <button mat-button color="warn" (click)="gameStepper.reset()">
-                Reset only game
-              </button>
+            <ng-container *ngIf="frameIndex === 0; else resetBtn">
               <button
                 mat-button
                 color="warn"
                 (click)="gameStepper.reset(); playersValidated = false"
               >
-                Reset to edit players
+                Edit Players
               </button>
-            </div>
+            </ng-container>
+            <ng-template #resetBtn>
+              <button mat-button color="warn" (click)="gameStepper.reset()">
+                Reset Game
+              </button>
+            </ng-template>
           </div>
         </form>
       </mat-step>

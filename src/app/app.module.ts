@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore, FirestoreModule } from '@angular/fire/firestore';
 import { firebaseConfig } from './config/firebase-config';
+
 import { HomeComponent } from './pages/home/home.component';
 import { EventsComponent } from './pages/events/events.component';
 import { CreateGameFormComponent } from './pages/events/components/create-game-form/create-game-form.component';
@@ -19,6 +20,8 @@ import { GameEventGridComponent } from './pages/events/components/game-event-gri
 import { SettingsComponent } from './pages/settings/settings.component';
 import { LicenseComponent } from './pages/settings/components/license/license.component';
 import { AboutComponent } from './pages/settings/components/about/about.component';
+import { GameGridComponent } from './shared/game-grid/game-grid.component';
+import { GameFrameComponent } from './shared/game-grid/game-frame/game-frame.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { AboutComponent } from './pages/settings/components/about/about.componen
     GameEventGridComponent,
     SettingsComponent,
     LicenseComponent,
-    AboutComponent
+    AboutComponent,
+    GameGridComponent,
+    GameFrameComponent
   ],
   imports: [
     BrowserModule,
