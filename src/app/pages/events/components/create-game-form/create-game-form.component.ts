@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -17,12 +18,11 @@ export class CreateGameFormComponent {
   scores = ['-', 1, 2, 3, 4, 5, 6, 7, 8, 9, '/', 'X'];
   playersValidated = false;
   playerChosenTwice = false;
+  players: IPlayer[] = [];
 
   gameForms: FormGroup<{
-    [frame: string]: FormControl<number | string>;
-  }>[] = this.setGameForms();
-
-  players: IPlayer[] = [];
+    [key: string]: FormControl<any>;
+  }>[] = [];
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: any,
@@ -34,19 +34,19 @@ export class CreateGameFormComponent {
   setGameForms() {
     const gameForms = [];
 
-    for (let roll = 1; roll <= 10; roll++) {
-      const frame: { [key: string]: FormControl } = {};
+    for (let frame = 1; frame <= 10; frame++) {
+      const rolls: { [key: string]: FormControl } = {};
 
-      frame['roll1'] = new FormControl(['', Validators.required]);
-      frame['roll2'] = new FormControl(['', Validators.required]);
+      for (const player of this.players) {
+        rolls[player.id + '_1'] = new FormControl(['', Validators.required]);
+        rolls[player.id + '_2'] = new FormControl(['', Validators.required]);
 
-      if (roll === 10) {
-        frame['roll3'] = new FormControl(['', Validators.required]);
+        if (frame === 10) {
+          rolls[player.id + '_3'] = new FormControl(['', Validators.required]);
+        }
       }
-
-      gameForms.push(this.fb.group(frame));
+      gameForms.push(this.fb.group(rolls));
     }
-
     return gameForms;
   }
 
@@ -75,5 +75,10 @@ export class CreateGameFormComponent {
   approvePlayers(event: any) {
     console.log(event);
     this.playersValidated = true;
+  }
+
+  approvePlayersAndSetForm() {
+    this.playersValidated = true;
+    this.gameForms = this.setGameForms();
   }
 }

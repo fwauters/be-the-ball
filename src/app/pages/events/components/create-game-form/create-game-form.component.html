@@ -1,32 +1,37 @@
-<app-select-players-form
-  [alreadyChosenError]="playerChosenTwice"
-  (selectPlayer)="addPlayer($event)"
-  (takeOffPlayer)="removePlayer()"
-  (validatePlayers)="playersValidated = true"
-></app-select-players-form>
+<div [hidden]="playersValidated">
+  <app-select-players-form
+    [alreadyChosenError]="playerChosenTwice"
+    (selectPlayer)="addPlayer($event)"
+    (takeOffPlayer)="removePlayer()"
+    (validatePlayers)="approvePlayersAndSetForm()"
+  ></app-select-players-form>
+</div>
 
-<ng-container *ngIf="playersValidated">
+<div [hidden]="!playersValidated">
   <mat-stepper #gameStepper [linear]="false" color="accent">
     <ng-container *ngFor="let frameForm of gameForms; let frameIndex = index">
       <mat-step [stepControl]="frameForm">
-        <form [formGroup]="frameForm">
-          <ng-template matStepLabel></ng-template>
+        <form [formGroup]="frameForm" class="flex flex-col items-start">
 
-          <ng-container *ngFor="let roll of [1, 2, 3]">
-            <mat-form-field
-              *ngIf="roll !== 3 || (roll === 3 && frameIndex === 9)"
-              appearance="outline"
-              color="accent"
-              class="w-[100px] m-[10px]"
-            >
-              <mat-label>Roll {{ roll }}</mat-label>
-              <mat-select [formControlName]="'roll' + roll" required>
-                <mat-option *ngFor="let score of scores" [value]="score">
-                  {{ score }}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-          </ng-container>
+          <div *ngFor="let player of players">
+            <span>{{ player.name }}</span>
+
+            <ng-container *ngFor="let roll of [1, 2, 3]">
+              <mat-form-field
+                *ngIf="roll !== 3 || (roll === 3 && frameIndex === 9)"
+                appearance="outline"
+                color="accent"
+                class="w-[100px] m-[10px]"
+              >
+                <mat-label>Roll {{ roll }}</mat-label>
+                <mat-select [formControlName]="player.id + '_' + roll" required>
+                  <mat-option *ngFor="let score of scores" [value]="score">
+                    {{ score }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </ng-container>
+          </div>
 
           <div class="flex justify-between">
             <div>
@@ -41,12 +46,21 @@
               </ng-template>
             </div>
 
-            <button mat-button color="warn" (click)="gameStepper.reset()">
-              Reset
-            </button>
+            <div>
+              <button mat-button color="warn" (click)="gameStepper.reset()">
+                Reset only game
+              </button>
+              <button
+                mat-button
+                color="warn"
+                (click)="gameStepper.reset(); playersValidated = false"
+              >
+                Reset to edit players
+              </button>
+            </div>
           </div>
         </form>
       </mat-step>
     </ng-container>
   </mat-stepper>
-</ng-container>
+</div>
