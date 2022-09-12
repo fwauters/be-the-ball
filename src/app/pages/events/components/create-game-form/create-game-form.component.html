@@ -13,23 +13,30 @@
       <mat-step [stepControl]="frameForm">
         <form [formGroup]="frameForm" class="flex flex-col items-start">
           <div *ngFor="let player of players">
-            <span>{{ player.name }}</span>
+            <div class="flex items-center">
+              <div class="w-[200px] pt-[5px]">
+                <span>{{ player.name }}</span>
+              </div>
 
-            <ng-container *ngFor="let roll of [1, 2, 3]">
-              <mat-form-field
-                *ngIf="roll !== 3 || (roll === 3 && frameIndex === 9)"
-                appearance="outline"
-                color="accent"
-                class="formFieldReset w-[100px] m-[10px]"
-              >
-                <mat-label>Roll {{ roll }}</mat-label>
-                <mat-select [formControlName]="player.id + '_' + roll" required>
-                  <mat-option *ngFor="let score of scores" [value]="score">
-                    {{ score }}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-            </ng-container>
+              <ng-container *ngFor="let roll of [1, 2, 3]">
+                <mat-form-field
+                  *ngIf="roll !== 3 || (roll === 3 && frameIndex === 9)"
+                  appearance="outline"
+                  color="accent"
+                  class="formFieldReset w-[100px] m-[10px]"
+                >
+                  <mat-label>Roll {{ roll }}</mat-label>
+                  <mat-select
+                    [formControlName]="player.id + '_' + roll"
+                    required
+                  >
+                    <mat-option *ngFor="let score of scores" [value]="score">
+                      {{ score }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </ng-container>
+            </div>
           </div>
 
           <!-- => actions -->
